@@ -9,22 +9,16 @@
 #'
 #' @param func function
 #' @param args list of argument values to \code{func}
-#' @param env_name name of conda environment
+#' @param python_path path to conda environment with '/bin/python' at the end
 #'
 #' @export
 RCondaRun <- function(
   func,
   args,
-  env_name
+  python_path
 ) {
   callr::r(
     func = function(func, args, env_name) {
-
-      cl <- reticulate::conda_list()
-      if (!env_name %in% cl$name) {
-        stop('Anaconda environment "', env_name, '" not found')
-      }
-      python_path <- cl$python[cl$name == env_name]
 
       Sys.setenv(RETICULATE_PYTHON = python_path)
       library(reticulate)
