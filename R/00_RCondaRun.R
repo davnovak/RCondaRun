@@ -18,7 +18,7 @@ RCondaRun <- function(
   python_path
 ) {
   callr::r(
-    func = function(func, args, env_name) {
+    func = function(func, args, python_path) {
 
       Sys.setenv(RETICULATE_PYTHON = python_path)
       library(reticulate)
@@ -29,9 +29,9 @@ RCondaRun <- function(
 
     },
     args = list(
-      'func' = func,
-      'args' = args,
-      'env_name' = env_name
+      'func'        = func,
+      'args'        = args,
+      'python_path' = python_path
     )
   )
 }
